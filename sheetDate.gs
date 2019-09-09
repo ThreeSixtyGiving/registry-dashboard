@@ -18,7 +18,6 @@ function createDateSheet(data, spreadsheet) {
     // extract data on the publishers
     for (var i in data) {
         if (data[i]["datagetter_aggregates"]) {
-            Logger.log(data[i]["datagetter_aggregates"]["max_award_date"]);
             if (data[i]["datagetter_aggregates"]["min_award_date"] != null) {
                 var min_date = Date.parse(data[i]["datagetter_aggregates"]["min_award_date"]);
                 min_dates.push(min_date);
