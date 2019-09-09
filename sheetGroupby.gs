@@ -24,7 +24,11 @@ function createFieldSummarySheet(data, spreadsheet, field, sheet_name) {
 
     var orgids_sorted = [];
     for (var orgid in orgids) {
-        if (field == 'recipient_org_identifier_prefixes' & orgid != "360G") {
+        if (field == 'recipient_org_identifier_prefixes') {
+            if (orgid != "360G") {
+                orgids_sorted.push([orgid, orgids[orgid]]);
+            }
+        } else {
             orgids_sorted.push([orgid, orgids[orgid]]);
         }
     }
