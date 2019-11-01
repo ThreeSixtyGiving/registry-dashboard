@@ -7,6 +7,7 @@ function createPublisherSheet(data, spreadsheet) {
 
     var header_row = [
         "Publisher",
+        "Prefix",
         "Website",
         "Files",
         //    "First issued",
@@ -20,13 +21,17 @@ function createPublisherSheet(data, spreadsheet) {
         "Earliest grant",
         "Latest grant",
         "Recipient location",
-        "Beneficiary location",
+        "Beneficiary location name",
+        "Beneficiary location code",
         "Charity or Company number",
         "Classification",
         "Grant programme",
         "Planned dates",
         "Metadata",
         "% with external identifiers",
+        "Non-standard fields",
+        "Unrecognised org ID",
+        "Non-GB org IDs",
     ];
 
     sheet.clear();
@@ -41,12 +46,15 @@ function createPublisherSheet(data, spreadsheet) {
 
     var count = 2;
 
-    for (var p in data) {
+    var pubs = Object.keys(data).sort();
 
-        var pub = data[p];
+    for (var p in pubs) {
+
+        var pub = data[pubs[p]];
 
         var metadata = pub["datagetter_metadata"] || {};
         var aggregates = pub["datagetter_aggregates"] || {};
+        var coverage = pub["datagetter_coverage"] || {};
         if (!aggregates["currencies"]) { aggregates["currencies"] = {}; }
         if (!aggregates["currencies"]["GBP"]) { aggregates["currencies"]["GBP"] = { "count": 0, "total_amount": 0 }; }
 
@@ -61,8 +69,16 @@ function createPublisherSheet(data, spreadsheet) {
         var issued = Date.parse(pub["issued"]) || null;
         if (issued) { issued = new Date(issued); }
 
+        var nongbids = Object.keys(aggregates["recipient_org_identifier_prefixes"]).filter(function (row) {
+            return row.slice(0, 4) != "360G" && row.slice(0, 3) != "GB-"
+        });
+        var fields = Object.keys(coverage).filter(function (row) {
+            return coverage[row]["standard"] == false
+        });
+
         var row_data = [
             pub["publisher"]["name"],
+            pub["publisher"]["prefix"],
             hyperlink(pub["publisher"]["website"], "website"),
             pub["files"].length,
             //      issued,
@@ -82,8 +98,9 @@ function createPublisherSheet(data, spreadsheet) {
             "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!F:F)" +
             ")>0",
             "=(" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!G:G)+" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!H:H)+" +
+            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!G:G)" +
+            ")>0",
+            "=(" +
             "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!I:I)" +
             ")>0",
             "=(" +
@@ -107,25 +124,28 @@ function createPublisherSheet(data, spreadsheet) {
             "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!S:S)" +
             ")>0",
             "=1-(sumif(org_id!A:A,A" + count + ",org_id!E:E)/sumif(org_id!A:A,A" + count + ",org_id!C:C))",
+            fields.length > 0,
+            Object.keys(aggregates["recipient_org_identifiers_unrecognised_prefixes"]).length > 0,
+            nongbids.length > 0,
         ]
         sheet.appendRow(row_data);
         count += 1;
     }
 
     // format date columns
-    var date_columns = [7, 8];
+    var date_columns = [8, 9];
     for (var i = 0; i < date_columns.length; i++) {
         sheet.getRange(2, date_columns[i], sheet.getLastRow() - 1).setNumberFormat('yyyy"-"mm"-"dd');
     }
 
     // format number columns
-    var num_columns = [3, 4, 5, 6];
+    var num_columns = [3, 4, 5, 6, 7];
     for (var i = 0; i < num_columns.length; i++) {
         sheet.getRange(2, num_columns[i], sheet.getLastRow() - 1).setNumberFormat('#,##0');
     }
 
     // format percentage columns
-    var pc_columns = [16];
+    var pc_columns = [18];
     for (var i = 0; i < pc_columns.length; i++) {
         sheet.getRange(2, pc_columns[i], sheet.getLastRow() - 1).setNumberFormat('0%');
     }
