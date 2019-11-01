@@ -12,7 +12,7 @@ function onOpen() {
  */
 function importRegistry() {
   // fetch the coverage file for the registry
-  var coverage_response = UrlFetchApp.fetch(threesixty_registry, {'muteHttpExceptions': true});
+  var coverage_response = UrlFetchApp.fetch(threesixty_registry, { 'muteHttpExceptions': true });
   var coverage_json = coverage_response.getContentText();
   var coverage_data = JSON.parse(coverage_json);
   
@@ -22,13 +22,13 @@ function importRegistry() {
   }
   
   // fetch the status file (used to fill in Big Lottery Fund details)
-  var status_response = UrlFetchApp.fetch(threesixty_status, {'muteHttpExceptions': true});
+  var status_response = UrlFetchApp.fetch(threesixty_status, { 'muteHttpExceptions': true });
   var status_json = status_response.getContentText();
   var data = JSON.parse(status_json);
   
   // fetch the status file used to fill in Big Lottery Fund details
   for (var i = 0; i < data.length; i++) {
-    if(coverage[data[i]["identifier"]]){
+    if (coverage[data[i]["identifier"]]) {
       data[i]["datagetter_coverage"] = coverage[data[i]["identifier"]];
     } else {
       data[i]["datagetter_coverage"] = {};
