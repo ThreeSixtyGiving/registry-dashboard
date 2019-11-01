@@ -43,7 +43,6 @@ function importRegistry() {
   createAllFieldsSheet(data["files"], spreadsheet);
   createMainSheet(data["files"], spreadsheet);
   createDateSheet(data["publishers"], spreadsheet);
-  createRFSheet(data["files"], spreadsheet, required_fields, "required_fields");
   createRFSheet(data["files"], spreadsheet, recommended_fields, "recommended_fields");
   createFieldSummarySheet(data["files"], spreadsheet, "currencies", "currencies");
   createFieldSummarySheet(data["files"], spreadsheet, "recipient_org_identifier_prefixes", "org_id");
