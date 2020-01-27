@@ -6,8 +6,8 @@ function createPublisherSheet(data, spreadsheet) {
     }
 
     var header_row = [
-        "Publisher",
         "Prefix",
+        "Publisher",
         "Website",
         "Files",
         //    "First issued",
@@ -21,8 +21,8 @@ function createPublisherSheet(data, spreadsheet) {
         "Earliest grant",
         "Latest grant",
         "Recipient location",
-        "Beneficiary location name",
         "Beneficiary location code",
+        "Beneficiary location name",
         "Charity or Company number",
         "Classification",
         "Grant programme",
@@ -77,8 +77,8 @@ function createPublisherSheet(data, spreadsheet) {
         });
 
         var row_data = [
-            pub["publisher"]["name"],
             pub["publisher"]["prefix"],
+            pub["publisher"]["name"],
             hyperlink(pub["publisher"]["website"], "website"),
             pub["files"].length,
             //      issued,
