@@ -92,38 +92,38 @@ function createPublisherSheet(data, spreadsheet) {
             min_date,
             max_date,
             "=(" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!C:C)+" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!D:D)+" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!E:E)+" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!F:F)" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!C:C)+" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!D:D)+" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!E:E)+" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!F:F)" +
             ")>0",
             "=(" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!G:G)" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!G:G)" +
             ")>0",
             "=(" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!I:I)" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!I:I)" +
             ")>0",
             "=(" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!J:J)+" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!K:K)" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!J:J)+" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!K:K)" +
             ")>0",
             "=(" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!L:L)+" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!M:M)" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!L:L)+" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!M:M)" +
             ")>0",
             "=(" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!N:N)" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!N:N)" +
             ")>0",
             "=(" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!O:O)+" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!P:P)+" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!Q:Q)" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!O:O)+" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!P:P)+" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!Q:Q)" +
             ")>0",
             "=(" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!R:R)+" +
-            "sumif(recommended_fields!A:A,A" + count + ",recommended_fields!S:S)" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!R:R)+" +
+            "sumif(recommended_fields!A:A,B" + count + ",recommended_fields!S:S)" +
             ")>0",
-            "=1-(sumif(org_id!A:A,A" + count + ",org_id!E:E)/sumif(org_id!A:A,A" + count + ",org_id!C:C))",
+            "=1-(sumif(org_id!A:A,B" + count + ",org_id!E:E)/sumif(org_id!A:A,B" + count + ",org_id!C:C))",
             fields.length > 0,
             Object.keys(aggregates["recipient_org_identifiers_unrecognised_prefixes"]).length > 0,
             nongbids.length > 0,
