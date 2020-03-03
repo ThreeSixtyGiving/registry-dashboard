@@ -1,5 +1,5 @@
-var threesixty_registry = 'https://storage.googleapis.com/datagetter-360giving-output/branch/master/coverage.json';
-var threesixty_status = 'https://storage.googleapis.com/datagetter-360giving-output/branch/master/status.json';
+var threesixty_registry = 'http://store.data.threesixtygiving.org/reports/daily_coverage.json';
+var threesixty_status = 'http://store.data.threesixtygiving.org/reports/daily_status.json';
 
 // identifier for very large BLF file
 var blf_file = 'a002400000Z58cqAAB';
