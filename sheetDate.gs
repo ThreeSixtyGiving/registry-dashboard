@@ -68,6 +68,8 @@ function createDateSheet(data, spreadsheet) {
     var range = sheet.getRange(1, 1, 1, header_row.length);
     range.setFontWeight("bold");
 
+    var all_data = []
+
     // add each publisher to the sheet
     for (var pub_name in data) {
         var row_data = [
@@ -86,8 +88,9 @@ function createDateSheet(data, spreadsheet) {
         }
         row_data.push(years);
 
-        sheet.appendRow(row_data);
+        all_data.push(row_data)
     }
+    writeMultipleRows(sheet, all_data)
 
     // format date columns
     var date_columns = sheet.getRange(2, 2, sheet.getLastRow() - 1, 2);

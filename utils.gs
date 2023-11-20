@@ -213,3 +213,9 @@ function by_publisher(data) {
         "files": data,
     };
 }
+
+
+function writeMultipleRows(sheet, data) {
+    var lastRow = sheet.getLastRow();
+    sheet.getRange(lastRow + 1, 1, data.length, data[0].length).setValues(data);
+}

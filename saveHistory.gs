@@ -17,6 +17,9 @@ function saveHistory(spreadsheet) {
             // we're only going to log values if they contain a number
             if (typeof dashboard_values[i][j] != 'number') { continue; }
 
+            // if there's no label row then don't save
+            if (dashboard_values[i + 1] == undefined) { continue; }
+
             // get the label (next cell down) and the cell itself
             var label = dashboard_values[i + 1][j];
             var cell = dashboard.getRange(i + 1, j + 1);

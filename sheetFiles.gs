@@ -37,6 +37,7 @@ function createMainSheet(data, spreadsheet) {
     sheet.setFrozenRows(1);
     sheet.setFrozenColumns(3);
 
+    var all_data = []
 
     for (var i = 0; i < data.length; i++) {
 
@@ -77,8 +78,9 @@ function createMainSheet(data, spreadsheet) {
             data[i]["distribution"][0]["accessURL"],
             data[i]["distribution"][0]["downloadURL"],
         ]
-        sheet.appendRow(row_data);
+        all_data.push(row_data)
     }
+    writeMultipleRows(sheet, all_data)
 
     // format date columns
     var date_columns = [7, 9, 16, 17];

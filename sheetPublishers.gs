@@ -48,6 +48,8 @@ function createPublisherSheet(data, spreadsheet) {
 
     var pubs = Object.keys(data).sort();
 
+    var all_data = []
+
     for (var p in pubs) {
 
         var pub = data[pubs[p]];
@@ -128,9 +130,12 @@ function createPublisherSheet(data, spreadsheet) {
             Object.keys(aggregates["recipient_org_identifiers_unrecognised_prefixes"]).length > 0,
             nongbids.length > 0,
         ]
-        sheet.appendRow(row_data);
+        all_data.push(row_data)
         count += 1;
     }
+    writeMultipleRows(sheet, all_data)
+
+
 
     // format date columns
     var date_columns = [8, 9];

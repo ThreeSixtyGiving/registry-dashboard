@@ -40,6 +40,8 @@ function createRFSheet(data, spreadsheet, rf, sheet_name) {
         col_count += rf[group].length;
     }
 
+    var all_data = [];
+
     for (var i = 0; i < data.length; i++) {
         var row_data = [
             data[i]["publisher"]["name"],
@@ -57,8 +59,9 @@ function createRFSheet(data, spreadsheet, rf, sheet_name) {
                 row_data.push(field_value);
             }
         }
-        sheet.appendRow(row_data);
+        all_data.push(row_data);
     }
+    writeMultipleRows(sheet, all_data)
 
     var range = sheet.getRange(2, 1, sheet.getMaxRows() - 1, header_row[1].length);
     range.createFilter();
